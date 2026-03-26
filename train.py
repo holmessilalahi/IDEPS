@@ -9,9 +9,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
-# =========================
+
 # LOAD DATA
-# =========================
 files = glob.glob("data/*.csv")
 
 df_list = [pd.read_csv(f) for f in files]
@@ -21,20 +20,15 @@ df = pd.concat(df_list, ignore_index=True)
 print("Total data:", len(df))
 
 
-# =========================
 # FEATURE & TARGET
-# =========================
-
 X = df[['latitude','longitude']]
 
 y_mag = df['magnitude']
 y_depth = df['depth']
 
 
-# =========================
-# TRAIN TEST SPLIT (80:20)
-# =========================
 
+# TRAIN TEST SPLIT (80:20)
 X_train, X_test, y_mag_train, y_mag_test = train_test_split(
     X, y_mag,
     test_size=0.20,
@@ -51,10 +45,7 @@ print("Training data:", len(X_train))
 print("Testing data :", len(X_test))
 
 
-# =========================
 # MODEL PARAMETER
-# =========================
-
 rf_mag = RandomForestRegressor(
     n_estimators=500,
     max_depth=25,
@@ -72,10 +63,8 @@ rf_depth = RandomForestRegressor(
 )
 
 
-# =========================
-# TRAIN MODEL
-# =========================
 
+# TRAIN MODEL
 print("\nTraining magnitude model...")
 rf_mag.fit(X_train, y_mag_train)
 
@@ -83,18 +72,14 @@ print("Training depth model...")
 rf_depth.fit(X_train, y_depth_train)
 
 
-# =========================
-# PREDICTION
-# =========================
 
+# PREDICTION
 pred_mag = rf_mag.predict(X_test)
 pred_depth = rf_depth.predict(X_test)
 
 
-# =========================
-# EVALUATION METRICS
-# =========================
 
+# EVALUATION METRICS
 def evaluate(y_true, y_pred, name):
 
     mae = mean_absolute_error(y_true, y_pred)
@@ -113,10 +98,8 @@ evaluate(y_mag_test, pred_mag, "Magnitude")
 evaluate(y_depth_test, pred_depth, "Depth")
 
 
-# =========================
-# CROSS VALIDATION
-# =========================
 
+# CROSS VALIDATION
 print("\nRunning 5-Fold Cross Validation...")
 
 cv_mag = cross_val_score(
@@ -141,10 +124,8 @@ print("\nCV R2 Magnitude :", round(cv_mag.mean(),4))
 print("CV R2 Depth     :", round(cv_depth.mean(),4))
 
 
-# =========================
-# SAVE MODEL
-# =========================
 
+# SAVE MODEL
 os.makedirs("models", exist_ok=True)
 
 joblib.dump(rf_mag, "models/rf_magnitude.pkl")

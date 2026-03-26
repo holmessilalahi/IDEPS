@@ -12,16 +12,10 @@ import glob
 
 app = Flask(__name__)
 
-# ==========================
 # GRAPH STYLE
-# ==========================
-
 plt.style.use('seaborn-v0_8-whitegrid')
 
-# ==========================
 # LOAD DATA
-# ==========================
-
 files = glob.glob("data/*.csv")
 
 df_list = [pd.read_csv(f) for f in files]
@@ -33,10 +27,8 @@ X = df[['latitude','longitude']]
 y_mag = df['magnitude']
 y_depth = df['depth']
 
-# ==========================
-# TRAIN MODEL
-# ==========================
 
+# TRAIN MODEL
 model_mag = RandomForestRegressor(
     n_estimators=200,
     random_state=42
@@ -50,10 +42,8 @@ model_depth = RandomForestRegressor(
 model_mag.fit(X, y_mag)
 model_depth.fit(X, y_depth)
 
-# ==========================
-# FUNCTION CREATE GRAPH
-# ==========================
 
+# FUNCTION CREATE GRAPH
 def create_plot(data, predicted_value, label):
 
     fig, ax = plt.subplots(figsize=(6,4))
@@ -107,10 +97,8 @@ def create_plot(data, predicted_value, label):
 
     return img_base64
 
-# ==========================
-# ROUTE
-# ==========================
 
+# ROUTE
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -142,9 +130,7 @@ def predict():
         "depth_plot": depth_plot
     })
 
-# ==========================
-# RUN APP
-# ==========================
 
+# RUN APP
 if __name__ == '__main__':
     app.run(debug=True)
