@@ -1,0 +1,116 @@
+/* =============================
+GLOBAL
+============================= */
+
+body{
+    background-color:#f5f7fb;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* =============================
+HEADER
+============================= */
+
+h2{
+    font-weight:600;
+    color:#2c3e50;
+    margin-bottom:20px;
+}
+
+
+/* =============================
+CARD STYLE
+============================= */
+
+.card{
+    border:none;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    background:white;
+}
+
+.card h5{
+    font-weight:600;
+    color:#34495e;
+}
+
+
+/* =============================
+FORM INPUT
+============================= */
+
+label{
+    font-weight:500;
+    margin-top:10px;
+}
+
+.form-control{
+    border-radius:8px;
+    border:1px solid #dce1e8;
+}
+
+.form-control:focus{
+    border-color:#3498db;
+    box-shadow:none;
+}
+
+
+/* =============================
+BUTTON
+============================= */
+
+.btn-primary{
+    background-color:#2e6edb;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background-color:#1c54b2;
+}
+
+
+/* =============================
+MAP
+============================= */
+
+#map{
+    height:420px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+
+/* =============================
+RESULT PANEL
+============================= */
+
+#mag, #depth{
+    font-size:22px;
+    color:#2c3e50;
+    font-weight:bold;
+}
+
+
+/* =============================
+GRAPH
+============================= */
+
+img{
+    border-radius:8px;
+}
+
+
+/* =============================
+RESPONSIVE
+============================= */
+
+@media (max-width:768px){
+
+#map{
+height:300px;
+}
+
+}
